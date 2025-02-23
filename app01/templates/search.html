@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block css %}
+    <style type="text/css">
+        .login-button { /* 按钮美化 */
+            width: 120px; /* 宽度 */
+            height: 60px; /* 高度 */
+            border-width: 1px; /* 边框宽度 */
+            border-radius: 8px; /* 边框半径 */
+            background: #1E90FF; /* 背景颜色 */
+            cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+            outline: #3c3c3c; /* 不显示轮廓线 */
+            font-family: "HONOR Sans", serif; /* 设置字体 */
+            color: white; /* 字体颜色 */
+            font-size: 17px; /* 字体大小 */
+            margin-top: 150px;
+        }
+
+        .login-button:hover { /* 鼠标移入按钮范围时改变颜色 */
+            background: #5599FF;
+        }
+
+        .text-frame {
+            width: 600px;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid #53aeb2;
+            padding: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .text-frame:focus {
+            box-shadow: 0 0 10px #6fced2; /* 添加发光效果 */
+            outline: none; /* 去除默认的轮廓线 */
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div style="text-align:center">
+        <form method="post" >
+            {% csrf_token %}
+            <input type="text" class="text-frame" name="wd" placeholder="请输入关键词">
+            <input type="submit" class="login-button" value="Search">
+        </form>
+    </div>
+{% endblock %}

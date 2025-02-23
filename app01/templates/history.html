@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-danger" href="/admin/add/">
+                清除所有
+            </a>
+            <div style="float:right;width: 500px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for..." name="q"
+                               value="{{ search_data }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                历史列表
+            </div>
+            <div class="panel-body ">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        {{ page_string }}
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>搜索内容</th>
+                    <th>链接</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in queryset %}
+                    <tr>
+                        <th>{{ obj.time }}</th>
+                        <td>{{ obj.text }}</td>
+                        <td><a href="https://www.baidu.com/s?wd={{ obj.text }}">https://www.baidu.com/s?wd={{ obj.text }}"</a></td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/history/{{ obj.id }}/edit/">编辑</a>
+                            <a class="btn btn-danger btn-xs" href="/history/{{ obj.id }}/delete/">删除</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
